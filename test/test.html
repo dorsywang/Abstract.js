@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<div id="p">sssssssssssss</div>
+</body>
+<script type="text/javascript" src="../src/core.js"></script>
+<script type="text/javascript" src="../src/basemodel.js"></script>
+<script type="text/javascript" src="../src/rendermodel.js"></script>
+<script type="text/javascript" src="../src/relationmodel.js"></script>
+<script type="text/javascript" src="../src/mutexmodel.js"></script>
+<script type="text/javascript">
+
+var model = new BaseModel({
+    el: "#p",
+    hello: "ok"
+});
+
+var renderModel = new RenderModel({
+      el: "#renderModel"
+});
+
+var renderModel2 = new RenderModel({
+      el: "#renderModel2"
+});
+
+var renderModel3 = new RenderModel({
+});
+
+console.log(renderModel3.el);
+
+var m2 = new MutexModel(
+    {el: "m2",
+
+    fuse: "tap1"
+    }
+);
+
+var r1 = new RenderModel({ el: "#r1"});
+var r2 = new RenderModel({ el: "#r2"});
+
+m2.add(r1);
+m2.add(r2);
+
+console.log(m2);
+
+var mutexModel = new MutexModel({el: "mutexModel"});
+
+mutexModel.add(renderModel);
+mutexModel.add(renderModel2);
+mutexModel.add(m2);
+
+mutexModel.addEventListener("tap1", function(e){
+    console.log(e);
+});
+
+m2.addEventListener("tap1", function(e){
+    console.log(e);
+});
+
+
+mutexModel.rock();
+
+document.getElementById("p").onclick = function(){
+    Model.trigger("tap1");
+};
+
+
+
+// 以下测试 mutex model 的互斥性
+
+</script>
+</html>
