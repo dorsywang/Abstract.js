@@ -1,16 +1,11 @@
-#快速上手
-##渲染页面
-我们将学习如何使用RenderModel去渲染页面模块
+#Get Rocking
+##Render Page
+We will learn how to use RenderModel to render page block;
 
 <img src="image/header.jpg" alt="" />
 
-
-<a href='http://runjs.cn/code/pdl9ae3u' target="_blank">
-可以看这个实例
-</a>
-
-##静态页面
-首先，我们需要使用html和css写出我们的静态页面。HTML结构如下
+##Static Page
+Firstly, we need to write static page using html and css; The html structure is as below;
 
 <pre class="brush: xml">
 <div class="header">
@@ -29,17 +24,17 @@
 </div>
 </pre>
 
-##提取模板
-第二步，我们需要将模板从上面的静态页面中抽离出来
+##Abstact Template
+Secondly, we need to abstact template from the upper html code.
 
-HTML结构将会如下
+The Html structure will be like
 
 <pre class="brush: xml">
 <div class="header">
 </div>
 </pre>
 
-模板文件如下（Abstract使用SodaRender进行渲染 <a href='http://alloyteam.github.io/SodaRender/'>sodaRender</a>）
+The template will be like(rendered by <a href='http://alloyteam.github.io/SodaRender/'>sodaRender</a>)
 <pre class="brush: xml">
     <div class="left logo"></div>
     <div class="right intro">
@@ -56,8 +51,8 @@ HTML结构将会如下
 
 </pre>
 
-##构建逻辑
-因为这仅仅是一个普通的渲染模块，我们使用RenderModel进行渲染
+##Construct Logics
+Since it's just common rendering block, so we use RenderModel to render this block;
 
 <pre class="brush:js">
 var header = new RenderModel({
@@ -83,31 +78,27 @@ var header = new RenderModel({
 header.rock();
 </pre>
 
-配置项解释
+the option el refers to the element which the template will append to;
 
-el: 渲染到的元素
+the option data, if given will be used by the template;
 
-data: 如果给了，将使用它做为数据来渲染页面
+the option processData, where you can process your data for the template.
 
-processData: 加工数据
+the option tmpl refers to the template str you are using.
 
-tmpl: 模板字符串
+the option complete is function, where you can do something after rendered.
 
-complete: 函数，渲染完成做一些事情
-
-模板使用了SodaRender引擎的filter "number", 我们定义sodaRender filter如下
+The template uses soda filter "number", we also need to define soda filter.
 <pre class="brush:js">
 sodaFilter("number", function(input){
       // ... some code here to format number
 });
 </pre>
 
-可以看到页面就渲染出来了
 
 
-
-## 从Server获取数据
-如果你需要从Server拿数据，只需要配置一个url参数和param参数就可以了
+##Fetch Data From Server
+If your need to fetch data from server, you just need to set the url option and param option.
 <pre class="brush:js">
 var header = new RenderModel({
     el: ".header",
@@ -129,7 +120,7 @@ var header = new RenderModel({
 header.rock();
 </pre>
 
-param也可以是函数
+param option also can be function.
 <pre class="brush:js">
 var header = new RenderModel({
     el: ".header",
@@ -154,17 +145,16 @@ header.rock();
 </pre>
 
 
-注意： RenderModel会把数据缓存到localStorage, 下将RenderModel第一次渲染将会使用缓存数据进行渲染。同时也会发cgi请求server的数据。如果数据回来了就会进行第二次渲染，这样用户可以很快的看到数据。
+Notice that RenderModel will cache the response data in localStorage. Next time RenderModel will using local cache data to render page block, at the same time, the request is also going on. When the response comes RenderModel will render another time to replace the old content. So users will see page details faster.
 
-如果你不希望使用这样的功能，你可以使用"noCache" 这个配置项越过第一次的缓存渲染
+If you don't want to use cache rendering, you can set the "noCache" option be true to pass the cache rendering. 
 
-
-## 刷新模块
-如果你想刷新这个模块，只需要调用refresh方法即可
+##Refresh block
+If you want to refresh this block, just call refresh method.
 
 <pre class="brush:js">
 header.refresh();
 </pre>
 
-## 更多的事情
-有更多的配置项可供使用。参加Doc
+##Do More thing
+There are more option settings to let you do more thing, see doc.
