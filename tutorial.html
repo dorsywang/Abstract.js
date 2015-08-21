@@ -38,8 +38,24 @@ SyntaxHighlighter.defaults['toolbar'] = false;
 var tutorialList = [
   {title: "首页", link: "home"},
   {title: "快速了解", link: "glance"},
+  {title: "三层架构体系", link: "thoery"},
   {title: "渲染页面", link: "renderpage"},
-  {title: "基本理论和理念", link: "theory"}
+  {title: "模块的二进制状态化", link: "modelrelationship"},
+  {title: "模块的关系模型", link: "relation"},
+  {title: "通讯模式", link: "commucation"},
+  {title: "模型继承", link: "extendModel"},
+  {title: "Abstract事件机制", link: "event"},
+  {title: "使用延时加载策略", link: "load"},
+  {title: "结束模型生命", link: "stop"},
+  {title: "cgiModel", link: "cgiModel"},
+  {title: "linkModel", link: "linkModel"},
+  {title: "模型配置与注入", link: "config"},
+  {title: "扩展模型", link: "extend"},
+  {title: "Soda模板概述", link: "sodaRender"},
+  {title: "Abstract 2.0通用规范", link: "codeguide"},
+  {title: "本页面代码示例", link: "example"},
+  {title: "示例代码", link: "example2"},
+  {title: "API文档", link: "API"},
 ];
 
 var renderList = new RenderModel({
@@ -52,7 +68,7 @@ var renderList = new RenderModel({
     <li class="link" soda-repeat="item in list" id="{{item.link}}">{{item.title}}</li>\
     </ul>\
       <div class="wrapper copyright">\
-        ©  AlloyTeam\
+        ©  AlloyTeam·dorsywang\
       </div>\
   ',
   el: ".index"
