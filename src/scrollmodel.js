@@ -149,20 +149,21 @@
         },
 
         extend: function(opt){
-            var clone = this.callSuperMethod('extend', {scrollEl: this.scrollEl});
+            // 这里注意 如果直接调用 callSuperMethod会导致在extend操作中取el为extend的el，containerCount里会把继承的el再增加1 
+            var renderModel = this.renderModel.extend(opt);
 
-            clone.renderModel = this.renderModel.extend(opt);
+            var clone = new ScrollModel(opt, renderModel);
 
             return clone;
         },
-        constructor: function(opt){
+        constructor: function(opt, renderModel){
             //this.addAcceptOpt(['scrollEl']);
             this.callSuper();
             this.scrollEl = opt.scrollEl || window;
 
             var scrollLock = this.get("scrollLock");
 
-            this.renderModel = new RenderModel(opt);
+            this.renderModel = renderModel || new RenderModel(opt);
             this.renderModel.active = function(){
                 this.render(this.el);
             };
@@ -192,7 +193,10 @@
 
             // 以下方法调用元素方法
             
-            this._registerInnerMethod(['hide', 'show', 'feed', 'isFirstDataRequestRender', 'el', 'renderContainer', 'beforeRequest', 'freeze', 'melt', 'onreset',  'reset', 'url', 'data', 'cgiCount'], this.renderModel);
+            var _this = this;
+            this._registerInnerMethod(['hide', 'show', 'feed', 'isFirstDataRequestRender', 'el', 'renderContainer', 'beforeRequest', 'freeze', 'melt', 'onreset',  'reset', 'url', 'data', 'cgiCount'], function(){
+                return  _this.renderModel;
+            });
 
 
         },
