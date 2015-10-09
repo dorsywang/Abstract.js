@@ -313,16 +313,26 @@
                     Object.defineProperty(this, item, function(item){
                         return {
                             set: function(value){
-                                el[item] = value;
+                                var _el = el;
+                                if(typeof el === "function"){
+                                    _el = el();
+                                }
+
+                                _el[item] = value;
                             },
 
                             get: function(value){
-                                if(typeof el[item] === "function"){
+                                var _el = el;
+                                if(typeof el === "function"){
+                                    _el = el();
+                                }
+
+                                if(typeof _el[item] === "function"){
                                     return function(){
-                                        return el[item].apply(el, arguments);
+                                        return _el[item].apply(_el, arguments);
                                     };
                                 }else{
-                                    return el[item];
+                                    return _el[item];
                                 }
                             }
                         };
@@ -343,7 +353,8 @@
         },
 
 
-        extend: function(opt){
+        extend: function(opt, setting){
+            console.log(setting, 'setting');
             var func = function(){};
 
             func.prototype = this;
@@ -373,19 +384,23 @@
                 return "abstract_" + ~~(100000 * Math.random()); 
             };
 
-            if(clone.el){
-                var id = $(clone.el).attr("id");
+            if(setting && setting.donotAddContainer){
+            }else{
 
-                if(id){
-                }else{
-                    id = getId();
-                    $(clone.el).attr("id", id);
-                }
+                if(clone.el){
+                    var id = $(clone.el).attr("id");
 
-                if(_containerCountInfo[id]){
-                    _containerCountInfo[id] ++;
-                }else{
-                    _containerCountInfo[id] = 1;
+                    if(id){
+                    }else{
+                        id = getId();
+                        $(clone.el).attr("id", id);
+                    }
+
+                    if(_containerCountInfo[id]){
+                        _containerCountInfo[id] ++;
+                    }else{
+                        _containerCountInfo[id] = 1;
+                    }
                 }
             }
 
