@@ -205,7 +205,9 @@
             this.status = "unactive";
 
             // active时的动作
+            /*
             this.unactive && this.unactive(event);
+            */
 
 
             var event = Model.createEvent({
@@ -214,7 +216,8 @@
                 name: eventName || 'anonymouse'
             });
 
-            this.unactive(event);
+            this.unactive && this.unactive(event);
+            //this.unactive(event);
 
             this.dispatchEvent(event);
 
