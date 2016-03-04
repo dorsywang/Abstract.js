@@ -25,3 +25,9 @@ page.add(common2);
 page.rock();
  
 </pre>
+
+###继承的本质
+继承实际上是让相同的模块有相似的属性
+
+###继承的注意点
+注意：为了防止events中事件的多次触发，events是不会继承，如果events被覆盖，则events会重新执行

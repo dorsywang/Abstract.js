@@ -628,3 +628,25 @@ span.controll1 {}
     margin: 0;
     padding: 0;
 }
+
+table {
+    background: #EFEFEF;
+    padding: 13px 19px;
+    border-radius: 4px;
+    order-collapse: collapse;
+    border-spacing:0;
+    padding: 0;
+}
+
+tr:nth-child(odd) {
+    background: #E2E2E2;
+}
+
+tr td,tr th {
+    padding: 11px 5px;
+}
+
+tr:nth-child(1) {
+    background: #23C9C7;
+    color: #fff;
+}
